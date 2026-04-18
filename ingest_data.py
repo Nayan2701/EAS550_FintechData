@@ -28,7 +28,7 @@ def load_idempotent(df, table_name, unique_col):
 
 def process_and_ingest():
 
-    df_customers = pd.read_csv('/Users/nayanpaliwal/Desktop/Spring-2026/data_query/FINTECH_DATA/EAS550_FintechData/archive/DimCustomer.csv')
+    df_customers = pd.read_csv('archive/DimCustomer.csv')
     df_customers = df_customers.rename(columns={
         'CustomerID': 'customer_id', 'FullName': 'full_name', 'DOB': 'dob',
         'Gender': 'gender', 'Region': 'region', 'Email': 'email',
@@ -38,7 +38,7 @@ def process_and_ingest():
     df_customers['join_date'] = pd.to_datetime(df_customers['join_date'], format='mixed').dt.date
     load_idempotent(df_customers, 'customers', 'customer_id')
 
-    df_accounts = pd.read_csv('/Users/nayanpaliwal/Desktop/Spring-2026/data_query/FINTECH_DATA/EAS550_FintechData/archive/DimAccount.csv')
+    df_accounts = pd.read_csv('archive/DimAccount.csv')
     df_accounts = df_accounts.rename(columns={
         'AccountID': 'account_id', 'CustomerID': 'customer_id',
         'AccountType': 'account_type', 'Balance': 'balance'
@@ -46,7 +46,7 @@ def process_and_ingest():
     df_accounts = df_accounts[['account_id', 'customer_id', 'account_type', 'balance']]
     load_idempotent(df_accounts, 'accounts', 'account_id')
 
-    df_products = pd.read_csv('/Users/nayanpaliwal/Desktop/Spring-2026/data_query/FINTECH_DATA/EAS550_FintechData/archive/Dimproduct.txt', sep=None, engine='python')
+    df_products = pd.read_csv('archive/Dimproduct.txt', sep=None, engine='python')
     df_products = df_products.rename(columns={
         'ProductID': 'product_id', 
         'ProductName': 'product_name', 
@@ -56,7 +56,7 @@ def process_and_ingest():
     df_products = df_products[['product_id', 'product_name', 'product_category']]
     load_idempotent(df_products, 'products', 'product_id')
 
-    df_transactions = pd.read_csv('/Users/nayanpaliwal/Desktop/Spring-2026/data_query/FINTECH_DATA/EAS550_FintechData/archive/FactTransaction.csv')
+    df_transactions = pd.read_csv('archive/FactTransaction.csv')
     df_transactions = df_transactions.rename(columns={
         'TransactionID': 'transaction_id', 'AccountID': 'account_id',
         'ProductID': 'product_id', 'TransactionDate': 'transaction_date',

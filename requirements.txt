@@ -1,0 +1,11 @@
+
+sqlalchemy==2.0.27        # SQL toolkit and Object-Relational Mapping (ORM)
+psycopg2-binary==2.9.9    # PostgreSQL database adapter for Python
+pandas==2.2.2             # Data manipulation (if used in your script)
+Faker==24.4.0             # Fake data generation (if you generated the synthetic data)
+python-dotenv==1.0.1      # For loading local database credentials from a .env file
+
+# --- Phase 2: Dimensional Modeling & CI/CD ---
+dbt-postgres==1.7.13      # The dbt core engine and PostgreSQL adapter
+sqlfluff==3.0.3           # The SQL linter for your CI/CD pipeline
+sqlfluff-templater-dbt==3.0.3 # Allows SQLFluff to read dbt's Jinja tags ({{ ref() }})

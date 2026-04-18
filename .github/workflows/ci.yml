@@ -1,0 +1,32 @@
+name: dbt CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install dbt-postgres sqlfluff sqlfluff-templater-dbt
+
+      - name: Run dbt Tests
+        run: |
+          dbt deps
+          dbt test --profiles-dir .
+        env:
+          DBT_POSTGRES_HOST: ${{ secrets.DB_HOST }}
+          DBT_POSTGRES_USER: ${{ secrets.DB_USER }}
+          DBT_POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DBT_POSTGRES_DB: ${{ secrets.DB_NAME }}
