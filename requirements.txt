@@ -9,3 +9,11 @@ python-dotenv==1.0.1      # For loading local database credentials from a .env f
 dbt-postgres==1.7.13      # The dbt core engine and PostgreSQL adapter
 sqlfluff==3.0.3           # The SQL linter for your CI/CD pipeline
 sqlfluff-templater-dbt==3.0.3 # Allows SQLFluff to read dbt's Jinja tags ({{ ref() }})
+
+# --- Phase 3
+streamlit
+pandas
+sqlalchemy
+psycopg2-binary
+python-dotenv
+plotly
