@@ -6,71 +6,94 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B.svg)](https://streamlit.io/)
 [![Deployed on Render](https://img.shields.io/badge/Deployed-Render-46E3B7.svg)](https://render.com/)
 
-**Live Dashboard:** https://fintech-customer-dashboard.onrender.com 
+**Live Dashboard:** https://fintech-customer-dashboard.onrender.com
 **Video Demo:** [Insert Video URL Here]
 
+---
+
 ## 📌 Project Overview
-This project is an end-to-end Data Engineering pipeline designed to process, model, and visualize financial transaction and customer demographic data. It utilizes a modern data stack to extract raw operational data, transform it via a structured staging and modeling process, and serve it to a live, interactive Business Intelligence dashboard.
+This project is an end‑to‑end data engineering pipeline that ingests transactional and customer data, transforms it with dbt into a star‑schema warehouse, and serves it to a live Streamlit BI dashboard. The result is a fast, interactive analytics experience with dynamic KPIs, time‑series trends, and customer insights.
 
-## 🗄️ Database Architecture & Data Modeling
-A core component of this project was transforming highly normalized transactional data into a denormalized Star Schema optimized for fast analytical queries.
-
-### 1. Raw Data Source (OLTP)
-The initial data ingestion follows a 3rd Normal Form (3NF) relational structure to ensure data integrity during capture.
-
-![Raw Data Schema](ERD_IMAGE.png)
-
-### 2. Analytical Data Warehouse (OLAP)
-Using dbt (Data Build Tool), the raw tables were transformed and modeled into a dimensional Star Schema. This structure significantly reduces SQL join complexity and powers the live Streamlit dashboard.
-
-![Dimensional Star Schema](Structure%20.jpg)
+---
 
 ## 🏗️ Architecture & Tech Stack
 
-* **Data Ingestion:** Custom Python scripts extract raw data and load it into the data warehouse.
-* **Storage / Data Warehouse:** **Neon (Serverless PostgreSQL)** is used for high-performance, cloud-native data storage.
-* **Data Transformation:** **dbt (Data Build Tool)** handles the ELT process, transforming raw tables into clean, tested `stg_` (staging) views, and ultimately into `dim_` (dimension) and `fct_` (fact) tables.
-* **Orchestration:** **GitHub Actions** automates and orchestrates the dbt transformation runs.
-* **Presentation Layer:** A **Streamlit** Python application serves as the BI Dashboard, querying the modeled data dynamically.
-* **Cloud Deployment:** The frontend application is continuously deployed and hosted on **Render**.
+![Raw Data Schema](ERD_IMAGE.png)
+
+![Dimensional Star Schema](Structure%20.jpg)
+
+**Core components:**
+- **Data Ingestion:** Python scripts load raw source data into Neon.
+- **Data Warehouse:** Neon (serverless PostgreSQL).
+- **Transformations:** dbt builds staging (`stg_`) views and dimension/fact models.
+- **Orchestration:** GitHub Actions runs dbt pipeline.
+- **Presentation:** Streamlit dashboard with live SQL queries.
+- **Deployment:** Render continuous deployment.
+
+---
 
 ## 📊 Dashboard Features
-The live Streamlit application features a multi-page architecture:
-1. **📇 Customer Directory:** A searchable interface querying the `dim_customers` dimension table.
-2. **💰 Financial Overview:** Interactive time-series and distribution visualizations driven by the `fct_transactions` fact table, including dynamic date-range filtering and KPI scorecards.
-3. **🚀 Advanced Analytics:** Automated aggregation models identifying top Lifetime Value (LTV) customers.
+The Streamlit app includes:
+1. **📇 Customer Directory** – searchable view from `dim_customers`.
+2. **💰 Financial Overview** – time‑series and distribution charts from `fct_transactions`, with date filtering and KPIs.
+3. **🚀 Advanced Analytics** – top LTV customers and aggregated metrics.
+
+---
+
+## 🖼️ Screenshots
+Add 2–3 screenshots of the deployed app:
+
+<img width="1385" height="780" alt="image" src="https://github.com/user-attachments/assets/a5792308-b893-47ca-a13a-d65e04914e5f" />
+<img width="1329" height="838" alt="image" src="https://github.com/user-attachments/assets/602ecc73-91ad-4484-a2a0-184603a2aed2" />
+<img width="1329" height="705" alt="image" src="https://github.com/user-attachments/assets/1ca7329c-48ff-427f-89ca-fa5b8e0e0421" />
+
+
+---
 
 ## ⚙️ Local Setup Instructions
 
-To run this project locally, follow these steps:
-
-**1. Clone the repository:**
+### 1) Clone the repository
 ```bash
-git clone https://github.com/yourusername/EAS550_FintechData.git
+git clone https://github.com/Nayan2701/EAS550_FintechData.git
 cd EAS550_FintechData
 ```
 
-**2. Install dependencies:**
+### 2) Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-**3. Configure Environment Variables:**
-Create a `.env` file in the root directory and add your Neon PostgreSQL connection string:
+### 3) Configure environment variables
+Create a `.env` file at the project root:
 
 ```
 DATABASE_URL=postgresql://[user]:[password]@[host]/[database]?sslmode=require
 ```
 
-**4. Run the Streamlit App:**
+### 4) Run the Streamlit app
 ```bash
 streamlit run app.py
 ```
 
+---
+
 ## 🗄️ Repository Structure
-- `app.py`: Main Streamlit application and UI routing.
-- `models/`: Contains all dbt SQL models (`stg_`, `dim_`, `fct_`).
-- `dbt_project.yml`: Configuration file for the dbt pipeline.
-- `schema.sql`: Initial DDL scripts for the database structure.
-- `requirements.txt`: Python dependencies for deployment.
-- `.github/workflows/`: CI/CD orchestration files.
+- `app.py` — Streamlit UI & queries
+- `models/` — dbt models (`stg_`, `dim_`, `fct_`)
+- `dbt_project.yml` — dbt configuration
+- `schema.sql` — database DDL
+- `requirements.txt` — Python dependencies
+- `.github/workflows/` — CI/CD automation
+
+---
+
+## 🔐 Security & Deployment Notes
+- **No credentials are hardcoded** — all secrets are managed with environment variables.
+- Render free tier may **cold‑start** after inactivity (wait ~60 seconds).
+
+---
+
+## ✅ Deliverables
+- **GitHub Repo:** https://github.com/Nayan2701/EAS550_FintechData.git
+- **Live App:** https://fintech-customer-dashboard.onrender.com
+- **Demo Video:** [Insert Video URL Here]
