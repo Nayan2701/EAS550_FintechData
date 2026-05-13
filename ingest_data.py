@@ -1,8 +1,8 @@
 import pandas as pd
 from sqlalchemy import create_engine
+import os
 
-DATABASE_URL = "postgresql://neondb_owner:npg_4wUkEueKrlT0@ep-empty-paper-anqv2oi6-pooler.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
-
+DATABASE_URL = os.getenv("DATABASE_URL")
 engine = create_engine(
     DATABASE_URL, 
     pool_size=5, 
