@@ -106,4 +106,4 @@ Every push to `main` triggers an automatic build and deploy.
 ## ✅ Deliverables
 - **GitHub Repo:** https://github.com/Nayan2701/EAS550_FintechData.git
 - **Live App:** https://fintech-customer-dashboard.onrender.com
-- **Demo Video:** *In progress (team upload pending)*
+- **Demo Video:** https://youtu.be/LPZSHYRm3aE?si=vgR50ZCDMjE30zlk
